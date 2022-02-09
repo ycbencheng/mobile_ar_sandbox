@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using System;
@@ -10,14 +11,17 @@ public enum BattleState { START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public class BattleSystem : MonoBehaviour
 {
     public BattleState state;
-    public TMP_Text dialogueText;
     public GameObject battle;
+    public TMP_Text dialogueText;
+    public Button resetButton;
 
     Animator playerAnimator;
     Animator enemyAnimator;
 
     Unit playerUnit;
     Unit enemyUnit;
+
+    bool isDead = false;
 
     void Start()
     {
@@ -40,9 +44,7 @@ public class BattleSystem : MonoBehaviour
 
 
     void Update()
-    {
-        bool isDead = false;
-       
+    {       
         if (state == BattleState.PLAYERTURN && Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -62,19 +64,22 @@ public class BattleSystem : MonoBehaviour
             }
 
         }
+        Debug.Log(isDead);
 
         if (isDead)
         {
             state = BattleState.WON;
-            Debug.Log("isDead");
             EndBattle();
-
         }
+    }
+
+    public void OnResetButton()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 
     void EndBattle()
     {
-        Debug.Log("End Battle");
         dialogueText.text = "You won the battle!";
     }
 }
