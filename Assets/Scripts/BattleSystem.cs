@@ -28,6 +28,7 @@ public class BattleSystem:MonoBehaviour {
 
   void Start() {
     batleState = BattleState.START;
+    resetButton.gameObject.SetActive(false);
     SetupBattle();
   }
 
@@ -62,12 +63,13 @@ public class BattleSystem:MonoBehaviour {
     }
 
     if (isDead) {
-     batleState = BattleState.WON;
+      batleState = BattleState.WON;
       EndBattle();
     }
   }
 
   void EndBattle() {
      dialogueText.text = "You won the battle!";
+     resetButton.gameObject.SetActive(true);
   }
 }
