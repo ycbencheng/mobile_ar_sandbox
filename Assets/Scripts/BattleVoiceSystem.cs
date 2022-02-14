@@ -27,7 +27,7 @@ public class BattleVoiceSystem:MonoBehaviour {
   Random rnd = new Random();
 
   bool isDead = false;
-  string[] wordsArray = {"Hello", "Welcome"};
+  string[] wordsArray = {"Attack", "Charge"};
   string spell = "";
 
   public void OnResetButton() {
@@ -70,7 +70,7 @@ public class BattleVoiceSystem:MonoBehaviour {
 
     battleState = BattleState.PLAYERTURN;
 
-    dialogueText.text = $"Say {spell}";
+    dialogueText.text = $"Say the word {spell}";
   }
 
   void EndBattle() {
@@ -94,7 +94,7 @@ public class BattleVoiceSystem:MonoBehaviour {
       isDead = enemyUnit.TakeDamage(playerUnit.damage);
 
     } else {
-      dialogueText.text = $"Say {spell} again.";
+      dialogueText.text = $"Say the word {spell} again.";
 
       recordAttackButton.GetComponentInChildren<Text>().text = "Try again!";
       recordAttackButton.gameObject.SetActive(true);
@@ -108,7 +108,7 @@ public class BattleVoiceSystem:MonoBehaviour {
   }
 
   public void OnPartialResult(string result) {
-    dialogueText.text = $"Say {spell} again.";
+    dialogueText.text = $"Say the word {spell} again.";
   }
 
   public void OnAvailabilityChange(bool available) {
